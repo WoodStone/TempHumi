@@ -1,0 +1,22 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+jar {
+    manifest {
+        attributes  'Main-Class': 'no.vestein.raspberry.temphumi.Main',
+                    'Class-Path': 'pi4j-core.jar charts4j-1.3.jar'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.pi4j', name: 'pi4j-core', version: '1.0'
+    compile group: 'com.googlecode.charts4j', name: 'charts4j', version: '1.3'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
