@@ -7,12 +7,13 @@ import java.util.Scanner;
 public class Sensor {
 
     private ArrayList<SensorListener> listeners = new ArrayList<>();
-    private int type;
-    private int pin;
+    private final int type;
+    private final int pin;
 
     public Sensor(int type, int pin) {
-        setPin(pin);
-        setType(type);
+        if (type != 11) throw new IllegalArgumentException("Type should be 11");
+        this.type = type;
+        this.pin = pin;
     }
 
     public void update() {
@@ -24,8 +25,7 @@ public class Sensor {
     }
 
     public List<Double> newReading() {
-//        String cmd = "sudo python DHT.py 11 4";
-        String cmd = "sudo python DHT.py" + type + pin;
+        String cmd = "sudo python DHT.py " + type + " " + pin;
         try {
             Process p = Runtime.getRuntime().exec(cmd.split(" "));
             p.waitFor();
@@ -39,16 +39,6 @@ public class Sensor {
 //            e.printStackTrace();
             throw new NullPointerException();
         }
-    }
-
-    public void setPin(int pin) {
-        if (pin != 4) throw new IllegalArgumentException();
-        this.pin = pin;
-    }
-
-    public void setType(int type) {
-        if (type != 11) throw new IllegalArgumentException();
-        this.type = type;
     }
 
     private void updateListeners(List<Double> newData) {

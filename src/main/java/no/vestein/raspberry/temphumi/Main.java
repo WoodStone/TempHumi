@@ -12,11 +12,29 @@ public class Main {
     public static LinkedList<List<Double>> data = new LinkedList<>();
 
     public static void main(String[] args) {
+        Sensor sensor = new Sensor(11, 4);
+        SensorData data = new SensorData(10);
 
-        System.out.println(example1());
+        sensor.addListener(data);
+
+        while (true) {
+            sensor.update();
+
+            System.out.println(ChartGen.makeChart(data.getData()));
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
+
+
+        }
+
+//        System.out.println(example1());
 
 //        update();
-        System.out.println(data);
+//        System.out.println(data);
 
     }
 
@@ -32,19 +50,20 @@ public class Main {
             humidity[i] = 100 - (Math.cos(30 * i * Math.PI / 180) * 10 + 50) * i / 20;
             temperature[i] = (Math.cos(30 * i * Math.PI / 180) * 10 + 50) * i / 20;
         }
-        Line line1 = Plots.newLine(Data.newData(temperature), Color.newColor("CA3D05"), "Temperature");
+//        Line line1 = Plots.newLine(Data.newData(temperature), Color.newColor("CA3D05"), "Temperature");
+        Line line1 = Plots.newLine(DataUtil.scaleWithinRange(0, 100, temperature), Color.YELLOW, "Temperature");
         line1.setLineStyle(LineStyle.newLineStyle(3, 1, 0));
         line1.addShapeMarkers(Shape.DIAMOND, Color.newColor("CA3D05"), 12);
         line1.addShapeMarkers(Shape.DIAMOND, Color.WHITE, 8);
         Line line2 = Plots.newLine(Data.newData(humidity), Color.SKYBLUE, "Humidity");
-        line2.setLineStyle(LineStyle.newLineStyle(3, 1, 0));
-        line2.addShapeMarkers(Shape.DIAMOND, Color.SKYBLUE, 12);
-        line2.addShapeMarkers(Shape.DIAMOND, Color.WHITE, 8);
+//        line2.setLineStyle(LineStyle.newLineStyle(3, 1, 0));
+        line2.addShapeMarkers(Shape.DIAMOND, Color.SKYBLUE, 10);
+        line2.addShapeMarkers(Shape.DIAMOND, Color.WHITE, 6);
 
 
         // Defining chart.
         LineChart chart = GCharts.newLineChart(line1, line2);
-        chart.setSize(600, 450);
+        chart.setSize(1000, 300);
         chart.setTitle("Temperature and Humidity", Color.BLACK, 14);
 //        chart.addHorizontalRangeMarker(40, 60, Color.newColor(Color.RED, 30));
 //        chart.addVerticalRangeMarker(70, 90, Color.newColor(Color.GREEN, 30));
