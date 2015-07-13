@@ -30,7 +30,7 @@ public class ChartGen {
 
 
         LineChart chart = GCharts.newLineChart(line1, line2);
-        chart.setSize(1000, 300);
+        chart.setSize(Constants.CHART_WIDTH, Constants.CHART_HEIGHT);
         chart.setTitle("Temperature and Humidity", Color.BLACK, 14);
 
         chart.addYAxisLabels(yAxis);
@@ -41,8 +41,7 @@ public class ChartGen {
         LinearGradientFill fill = Fills.newLinearGradientFill(0, Color.WHITESMOKE, 100);
         chart.setAreaFill(fill);
 
-        String url = chart.toURLString();
-        return url;
+        return chart.toURLString();
     }
 
 }
