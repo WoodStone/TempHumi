@@ -17,14 +17,10 @@ public class Sensor {
     }
 
     public void update() {
-        try {
-            updateListeners(newReading());
-        } catch (NullPointerException e) {
-
-        }
+        updateListeners(newReading());
     }
 
-    public List<Double> newReading() {
+    private List<Double> newReading() {
         String cmd = "sudo python DHT.py " + type + " " + pin;
         try {
             Process p = Runtime.getRuntime().exec(cmd.split(" "));

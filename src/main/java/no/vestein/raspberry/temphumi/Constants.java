@@ -2,8 +2,12 @@ package no.vestein.raspberry.temphumi;
 
 public class Constants {
 
-    public static final int DATA_RANGE_MAX = 50;
+    public static final int DATA_RANGE_MAX = 80;
     public static final int DATA_RANGE_MIN = 0;
+    public static final int DATA_TIME_MAX = 10;
+    public static final int DATA_TIME_MIN = 0;
+
+    public static final int NUM_OF_READINGS = DATA_TIME_MAX + 1;
 
     public static final int CHART_HEIGHT = 300;
     public static final int CHART_WIDTH = 1000;
