@@ -1,5 +1,7 @@
 package no.vestein.raspberry.temphumi;
 
+import com.googlecode.charts4j.Color;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +11,8 @@ public class SensorData implements  SensorListener {
     private final int listLength;
     private LinkedList<Double> tempData = new LinkedList<>();
     private LinkedList<Double> humiData = new LinkedList<>();
+    private DataChart tempChart = new DataChart(0, 40, 0.5, Color.RED, "Temperature", tempData);
+    private DataChart humiChart = new DataChart(20, 80, 1, Color.SKYBLUE, "Humidity", humiData);
 
     public SensorData(int listLength) {
         this.listLength = listLength;
@@ -18,7 +22,6 @@ public class SensorData implements  SensorListener {
         ArrayList<LinkedList<Double>> data = new ArrayList<>();
         data.add(tempData);
         data.add(humiData);
-
         return data;
     }
 
@@ -28,6 +31,14 @@ public class SensorData implements  SensorListener {
 
     public LinkedList<Double> getHumiData() {
         return humiData;
+    }
+
+    public String getTempChart() {
+        return tempChart.chart();
+    }
+
+    public String getHumiChart() {
+        return humiChart.chart();
     }
 
     @Override
