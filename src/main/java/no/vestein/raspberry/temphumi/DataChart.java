@@ -41,7 +41,7 @@ public class DataChart {
         chart.addYAxisLabels(yAxis);
         chart.addXAxisLabels(xAxis);
 
-        chart.setGrid(10, (1000.0 / ((rangeMax - rangeMin))) * intervalMultiplier, 3, 2);
+        chart.setGrid(10, yAxisStepSize(), 3, 2);
         chart.setBackgroundFill(Fills.newSolidFill(Color.WHITE));
 
         LinearGradientFill fill = Fills.newLinearGradientFill(0, Color.WHITESMOKE, 100);
@@ -49,5 +49,9 @@ public class DataChart {
 
         return chart.toURLString();
 
+    }
+
+    private double yAxisStepSize() {
+        return (1000.0 / ((rangeMax - rangeMin))) * intervalMultiplier;
     }
 }

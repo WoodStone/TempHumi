@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Main {
 
-    private static boolean debug = true;
+    private static final boolean debug = true;
 
     public static void main(String[] args) {
         if (debug) {
