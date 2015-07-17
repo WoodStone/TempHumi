@@ -23,23 +23,17 @@ public class Main {
 
         sensor.addListener(data);
 
-        int n = 0;
-
         while (true) {
-            sensor.update();
-
-            if (n == Constants.NUM_OF_READINGS) {
-                n = 0;
+            for (int i = 0; i < Constants.NUM_OF_READINGS; i++) {
+                sensor.update();
                 System.out.println(data.getTempChart());
                 System.out.println(data.getHumiChart());
                 System.out.println("------------------------");
-            } else {
-                n++;
-            }
-            try {
-                Thread.sleep(Constants.SLEEP_TIME);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(Constants.SLEEP_TIME);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
