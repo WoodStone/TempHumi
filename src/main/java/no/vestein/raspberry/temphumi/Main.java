@@ -1,9 +1,13 @@
 package no.vestein.raspberry.temphumi;
 
 import com.googlecode.charts4j.Color;
+import no.vestein.raspberry.temphumi.command.CommandBase;
+import no.vestein.raspberry.temphumi.command.CommandHandler;
 
+import java.io.Console;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
 
@@ -20,21 +24,35 @@ public class Main {
     public static void pi() {
         Sensor sensor = new Sensor(11, 4);
         SensorData data = new SensorData(Constants.NUM_OF_READINGS);
-
         sensor.addListener(data);
 
-        while (true) {
-            for (int i = 0; i < Constants.NUM_OF_READINGS; i++) {
-                sensor.update();
-                System.out.println(data.getTempChart());
-                System.out.println(data.getHumiChart());
-                System.out.println("------------------------");
-                try {
-                    Thread.sleep(Constants.SLEEP_TIME);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        CommandHandler commandHandler = CommandHandler.getInstance();
+        commandHandler.registerCommand(new CommandBase() {
+            @Override
+            public String getName() {
+                return "read";
+            }
+
+            @Override
+            public void processCommand(List<String> strings) {
+                for (int i = 0; i < Constants.NUM_OF_READINGS; i++) {
+                    sensor.update();
+                    System.out.println(data.getTempChart());
+                    System.out.println(data.getHumiChart());
+                    System.out.println("------------------------");
+                    try {
+                        Thread.sleep(Constants.SLEEP_TIME);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+        });
+
+        Console console = System.console();
+        while (true) {
+            String[] input  = console.readLine().split(" ");
+            commandHandler.checkInput(input);
         }
     }
 
