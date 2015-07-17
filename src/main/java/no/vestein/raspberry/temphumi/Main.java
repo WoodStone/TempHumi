@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Main {
 
-    private static final boolean debug = true;
+    private static final boolean debug = false;
 
     public static void main(String[] args) {
         if (debug) {
@@ -23,10 +23,19 @@ public class Main {
 
         sensor.addListener(data);
 
+        int n = 0;
+
         while (true) {
             sensor.update();
 
-            System.out.println(data.getTempChart());
+            if (n == Constants.NUM_OF_READINGS) {
+                n = 0;
+                System.out.println(data.getTempChart());
+                System.out.println(data.getHumiChart());
+                System.out.println("------------------------");
+            } else {
+                n++;
+            }
             try {
                 Thread.sleep(Constants.SLEEP_TIME);
             } catch (InterruptedException e) {

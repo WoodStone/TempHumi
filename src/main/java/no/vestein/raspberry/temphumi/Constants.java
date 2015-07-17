@@ -2,7 +2,7 @@ package no.vestein.raspberry.temphumi;
 
 public class Constants {
 
-    public static final int DATA_TIME_MAX = 10;
+    public static final int DATA_TIME_MAX = 20;
     public static final int DATA_TIME_MIN = 0;
     public static final int DATA_TIME_INTERVAL = 1;
     public static final int DATA_YAXIS_INTERVAL = 10;
