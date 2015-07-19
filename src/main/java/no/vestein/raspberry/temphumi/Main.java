@@ -1,7 +1,7 @@
 package no.vestein.raspberry.temphumi;
 
 import com.googlecode.charts4j.Color;
-import no.vestein.raspberry.temphumi.command.CommandBase;
+import no.vestein.raspberry.temphumi.command.ICommand;
 import no.vestein.raspberry.temphumi.command.CommandHandler;
 
 import java.io.Console;
@@ -27,11 +27,7 @@ public class Main {
         sensor.addListener(data);
 
         CommandHandler commandHandler = CommandHandler.getInstance();
-        commandHandler.registerCommand(new CommandBase() {
-            @Override
-            public String getName() {
-                return "read";
-            }
+        commandHandler.registerCommand("read", new ICommand() {
 
             @Override
             public void processCommand(List<String> strings) {

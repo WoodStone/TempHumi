@@ -2,12 +2,9 @@ package no.vestein.raspberry.temphumi.command;
 
 import java.util.*;
 
-/**
- * Created by Vestein Dahl on 18.05.2015.
- */
 public class CommandHandler {
 
-    private Map<String, CommandBase> commandMap = new HashMap<>();
+    private Map<String, ICommand> commandMap = new HashMap<>();
     private static CommandHandler instance = new CommandHandler();
 
     public static CommandHandler getInstance() {
@@ -18,9 +15,9 @@ public class CommandHandler {
 
     }
 
-    public void registerCommand(CommandBase command) {
-        if (commandMap.containsKey(command.getName())) return;
-        commandMap.put(command.getName(), command);
+    public void registerCommand(String legend, ICommand command) {
+        if (commandMap.containsKey(legend)) return;
+        commandMap.put(legend, command);
     }
 
     public void checkInput(String[] input) {
