@@ -2,7 +2,7 @@ package no.vestein.raspberry.temphumi.command;
 
 public enum EnumCommand {
 
-    NEW_READING("read", new NewReading()),
+    GET_GRAPHS("graphs", new GetGraphs()),
     QUIT("quit", new Quit());
 
     private final String legend;
