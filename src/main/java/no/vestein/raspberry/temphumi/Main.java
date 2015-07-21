@@ -2,8 +2,7 @@ package no.vestein.raspberry.temphumi;
 
 import com.googlecode.charts4j.Color;
 import no.vestein.raspberry.temphumi.command.CommandTask;
-import no.vestein.raspberry.temphumi.sensor.Sensor;
-import no.vestein.raspberry.temphumi.sensor.SensorData;
+import no.vestein.raspberry.temphumi.sensor.SensorTask;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -13,11 +12,8 @@ public class Main {
     private static final boolean debug = false;
 
     public static void main(String[] args) {
-        if (debug) {
-            debug();
-        } else {
-            pi();
-        }
+        if (debug) debug();
+        else pi();
     }
 
     public static void shutdown() {
@@ -25,13 +21,14 @@ public class Main {
     }
 
     public static void pi() {
-        Sensor sensor = new Sensor(11, 4);
-        SensorData data = new SensorData(Constants.NUM_OF_READINGS);
-        sensor.addListener(data);
-
+        SensorTask sensorTask = new SensorTask();
         CommandTask commandTask = new CommandTask();
+
         Thread tCommand = new Thread(commandTask);
+        Thread tSensor = new Thread(sensorTask);
+
         tCommand.start();
+        tSensor.start();
     }
 
     public static void debug() {

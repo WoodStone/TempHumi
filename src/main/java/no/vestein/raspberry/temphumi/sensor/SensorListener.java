@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface SensorListener {
 
-    public void newReading(List<Double> newReading);
+    void newReading(List<Double> newReading);
 
 }
