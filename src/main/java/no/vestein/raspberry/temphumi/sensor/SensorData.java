@@ -1,12 +1,13 @@
-package no.vestein.raspberry.temphumi;
+package no.vestein.raspberry.temphumi.sensor;
 
 import com.googlecode.charts4j.Color;
+import no.vestein.raspberry.temphumi.DataChart;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SensorData implements  SensorListener {
+public class SensorData implements SensorListener {
 
     private final int listLength;
     private LinkedList<Double> tempData = new LinkedList<>();

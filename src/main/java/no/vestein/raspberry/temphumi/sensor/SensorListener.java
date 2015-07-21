@@ -1,4 +1,4 @@
-package no.vestein.raspberry.temphumi;
+package no.vestein.raspberry.temphumi.sensor;
 
 import java.util.List;
 
