@@ -35,4 +35,8 @@ public class CommandHandler {
         System.out.println("Unknown command");
     }
 
+    public void checkInput(ArrayList<String> input) {
+        checkInput((String[]) input.toArray());
+    }
+
 }

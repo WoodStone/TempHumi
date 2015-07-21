@@ -2,7 +2,8 @@ package no.vestein.raspberry.temphumi.command;
 
 public enum EnumCommand {
 
-    NEW_READING("read", new NewReading());
+    NEW_READING("read", new NewReading()),
+    QUIT("quit", new Quit());
 
     private final String legend;
     private final ICommand cClass;
@@ -12,7 +13,7 @@ public enum EnumCommand {
         this.cClass = cClass;
     }
 
-    public void init() {
+    public static void init() {
         CommandHandler handler = CommandHandler.getInstance();
         for (EnumCommand command : values()) {
             handler.registerCommand(command.legend, command.cClass);

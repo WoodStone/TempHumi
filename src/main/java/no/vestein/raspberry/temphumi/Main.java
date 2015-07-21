@@ -1,13 +1,12 @@
 package no.vestein.raspberry.temphumi;
 
 import com.googlecode.charts4j.Color;
-import no.vestein.raspberry.temphumi.command.ICommand;
-import no.vestein.raspberry.temphumi.command.CommandHandler;
+import no.vestein.raspberry.temphumi.command.CommandTask;
+import no.vestein.raspberry.temphumi.sensor.Sensor;
+import no.vestein.raspberry.temphumi.sensor.SensorData;
 
-import java.io.Console;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Main {
 
@@ -21,35 +20,18 @@ public class Main {
         }
     }
 
+    public static void shutdown() {
+        System.exit(0);
+    }
+
     public static void pi() {
         Sensor sensor = new Sensor(11, 4);
         SensorData data = new SensorData(Constants.NUM_OF_READINGS);
         sensor.addListener(data);
 
-        CommandHandler commandHandler = CommandHandler.getInstance();
-        commandHandler.registerCommand("read", new ICommand() {
-
-            @Override
-            public void processCommand(List<String> strings) {
-                for (int i = 0; i < Constants.NUM_OF_READINGS; i++) {
-                    sensor.update();
-                    System.out.println(data.getTempChart());
-                    System.out.println(data.getHumiChart());
-                    System.out.println("------------------------");
-                    try {
-                        Thread.sleep(Constants.SLEEP_TIME);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        Console console = System.console();
-        while (true) {
-            String[] input  = console.readLine().split(" ");
-            commandHandler.checkInput(input);
-        }
+        CommandTask commandTask = new CommandTask();
+        Thread tCommand = new Thread(commandTask);
+        tCommand.start();
     }
 
     public static void debug() {
@@ -61,7 +43,6 @@ public class Main {
 
         System.out.println(tempChart.chart());
         System.out.println(humiChart.chart());
-        System.out.println(100.0 / ((80 - 20) / 10));
     }
 
 }
