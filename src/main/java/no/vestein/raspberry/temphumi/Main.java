@@ -7,12 +7,10 @@ import no.vestein.raspberry.temphumi.sensor.SensorTask;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class Main {
-
-    private static final boolean debug = false;
+public final class Main {
 
     public static void main(String[] args) {
-        if (debug) debug();
+        if (args.length > 0 && args[0].equals(Constants.DEV_ARG)) debug();
         else pi();
     }
 

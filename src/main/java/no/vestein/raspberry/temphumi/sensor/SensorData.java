@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class SensorData implements SensorListener {
+public final class SensorData implements SensorListener {
 
     private final int listLength;
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
-    private LinkedList<Double> tempData = new LinkedList<>();
-    private LinkedList<Double> humiData = new LinkedList<>();
-    private DataChart tempChart = new DataChart(0, 40, 0.5, Color.RED, "Temperature", tempData);
-    private DataChart humiChart = new DataChart(20, 80, 1, Color.SKYBLUE, "Humidity", humiData);
+    private final LinkedList<Double> tempData = new LinkedList<>();
+    private final LinkedList<Double> humiData = new LinkedList<>();
+    private final DataChart tempChart = new DataChart(0, 40, 0.5, Color.RED, "Temperature", tempData);
+    private final DataChart humiChart = new DataChart(20, 80, 1, Color.SKYBLUE, "Humidity", humiData);
 
     public SensorData(int listLength) {
         this.listLength = listLength;

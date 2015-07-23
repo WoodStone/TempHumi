@@ -11,7 +11,7 @@ public class DataChart {
     private final double intervalMultiplier;
     private final Color color;
     private final String legend;
-    private LinkedList<Double> data;
+    private final LinkedList<Double> data;
 
     public DataChart(int rangeMin, int rangeMax, double intervalMultiplier, Color color, String legend, LinkedList<Double> data) {
         this.rangeMin = rangeMin;

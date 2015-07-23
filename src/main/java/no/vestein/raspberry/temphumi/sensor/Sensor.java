@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Sensor {
 
-    private ArrayList<SensorListener> listeners = new ArrayList<>();
+    private final ArrayList<SensorListener> listeners = new ArrayList<>();
     private final int type;
     private final int pin;
 
@@ -31,8 +31,7 @@ public class Sensor {
                 reading.add(scanner.nextDouble());
             }
             return reading;
-        } catch (Exception e) {
-//            e.printStackTrace();
+        } catch (Exception e) {;
             throw new NullPointerException();
         }
     }

@@ -2,7 +2,7 @@ package no.vestein.raspberry.temphumi.command;
 
 import java.io.Console;
 
-public class CommandTask implements Runnable {
+public final class CommandTask implements Runnable {
 
     @Override
     public void run() {
@@ -10,7 +10,7 @@ public class CommandTask implements Runnable {
         Console console = System.console();
         while (!Thread.interrupted()) {
             System.out.print("Command: ");
-            CommandHandler.getInstance().checkInput(console.readLine().split(" "));
+            CommandHandler.instance().checkInput(console.readLine().split(" "));
         }
     }
 

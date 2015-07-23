@@ -14,7 +14,7 @@ public enum EnumCommand {
     }
 
     public static void init() {
-        CommandHandler handler = CommandHandler.getInstance();
+        CommandHandler handler = CommandHandler.instance();
         for (EnumCommand command : values()) {
             handler.registerCommand(command.legend, command.cClass);
         }
