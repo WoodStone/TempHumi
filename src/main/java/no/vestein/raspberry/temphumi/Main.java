@@ -10,16 +10,32 @@ import java.util.LinkedList;
 public final class Main {
 
     public static void main(String[] args) {
-        if (args.length > 0 && args[0].equals(Constants.DEV_ARG)) debug();
-        else pi();
+        if (args.length > 0) {
+            if (args[0].equals(Constants.DEV_ARG)) debug();
+            else if (args[0].equals(Constants.AUTO_ARG)) auto();
+            else pi();
+        }
     }
 
     public static void shutdown() {
         System.exit(0);
     }
 
+    public static void auto() {
+        SensorTask sensorTask = new SensorTask(Constants.AUTO_TIME);
+        AutoTask autoTask = new AutoTask();
+
+        Thread tSensor = new Thread(sensorTask);
+        Thread tAuto = new Thread(autoTask);
+
+        tSensor.start();
+        tAuto.start();
+    }
+
     public static void pi() {
-        SensorTask sensorTask = new SensorTask();
+        System.out.println("Command Mode");
+        System.out.println("Remember '-auto' for Auto Mode");
+        SensorTask sensorTask = new SensorTask(Constants.CMD_TIME);
         CommandTask commandTask = new CommandTask();
 
         Thread tCommand = new Thread(commandTask);
