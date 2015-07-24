@@ -11,7 +11,7 @@ public class AutoTask implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (!Thread.interrupted()) {
                 updateFile();
                 TimeUnit.MINUTES.sleep(1);
             }

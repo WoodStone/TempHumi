@@ -2,16 +2,10 @@ package no.vestein.raspberry.temphumi.command;
 
 import java.util.*;
 
-public final class CommandHandler {
+public enum CommandHandler {
+    INTANCE;
 
     private final Map<String, ICommand> commandMap = new HashMap<>();
-    private static final CommandHandler instance = new CommandHandler();
-
-    public static CommandHandler instance() {
-        return instance;
-    }
-
-    private CommandHandler() {}
 
     public void registerCommand(String legend, ICommand command) {
         if (commandMap.containsKey(legend)) return;

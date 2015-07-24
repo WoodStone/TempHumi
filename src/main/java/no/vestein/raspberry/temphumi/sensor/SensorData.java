@@ -4,6 +4,7 @@ import com.googlecode.charts4j.Color;
 import no.vestein.raspberry.temphumi.DataChart;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -37,7 +38,7 @@ public final class SensorData implements SensorListener {
     public LinkedList<Double> getTempData() {
         lock.readLock().lock();
         try {
-            return tempData;
+            return (LinkedList<Double>) Collections.unmodifiableList(tempData);
         } finally {
             lock.readLock().unlock();
         }
@@ -46,7 +47,7 @@ public final class SensorData implements SensorListener {
     public LinkedList<Double> getHumiData() {
         lock.readLock().lock();
         try {
-            return humiData;
+            return (LinkedList<Double>) Collections.unmodifiableList(humiData);
         } finally {
             lock.readLock().unlock();
         }

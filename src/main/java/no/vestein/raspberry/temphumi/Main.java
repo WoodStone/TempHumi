@@ -4,16 +4,22 @@ import com.googlecode.charts4j.Color;
 import no.vestein.raspberry.temphumi.command.CommandTask;
 import no.vestein.raspberry.temphumi.sensor.SensorTask;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public final class Main {
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         if (args.length > 0) {
-            if (args[0].equals(Constants.DEV_ARG)) debug();
-            else if (args[0].equals(Constants.AUTO_ARG)) auto();
-            else pi();
+            switch (args[0]){
+                case Constants.DEV_ARG:
+                    debug();
+                    break;
+                case Constants.AUTO_ARG:
+                    auto();
+                    break;
+                default:
+                    pi();
+            }
         }
     }
 
@@ -46,8 +52,12 @@ public final class Main {
     }
 
     public static void debug() {
-        LinkedList<Double> temp = new LinkedList<>(Arrays.asList(20.0, 23.0, 25.0, 26.0, 22.0, 22.0, 25.0, 25.0, 21.0, 15.0, 22.0));
-        LinkedList<Double> humi = new LinkedList<>(Arrays.asList(40.0, 50.0, 44.0, 54.0, 53.0, 50.0, 45.0, 43.0, 40.0, 35.0, 40.0));
+        LinkedList<Double> temp = new LinkedList<>();
+        LinkedList<Double> humi = new LinkedList<>();
+        for (int i=0; i < Constants.NUM_OF_READINGS; i++) {
+            temp.add((double) Util.randInt(20, 30));
+            humi.add((double) Util.randInt(40, 50));
+        }
 
         DataChart tempChart = new DataChart(0, 40, 0.5, Color.RED, "Temperature", temp);
         DataChart humiChart = new DataChart(20, 80, 1, Color.SKYBLUE, "Humidity", humi);
