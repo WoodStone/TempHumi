@@ -25,9 +25,9 @@ public class DataChart {
 
     public String chart() {
         Line line1 = Plots.newLine(DataUtil.scaleWithinRange(rangeMin, rangeMax, data), color);
-        line1.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
-        line1.addShapeMarkers(Shape.DIAMOND, color, 10);
-        line1.addShapeMarkers(Shape.DIAMOND, Color.WHITE, 6);
+        line1.setLineStyle(LineStyle.newLineStyle(1, 1, 0));
+        line1.addShapeMarkers(Shape.DIAMOND, color, 8);
+        line1.addShapeMarkers(Shape.DIAMOND, Color.WHITE, 4);
 
         AxisStyle axisStyle = AxisStyle.newAxisStyle(Color.BLACK, 12, AxisTextAlignment.CENTER);
         AxisLabels yAxis = AxisLabelsFactory.newNumericRangeAxisLabels(rangeMin, rangeMax, DATA_YAXIS_INTERVAL);
