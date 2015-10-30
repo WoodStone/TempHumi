@@ -10,7 +10,7 @@ public final class CommandTask implements Runnable {
         Console console = System.console();
         while (!Thread.interrupted()) {
             System.out.print("Command: ");
-            CommandHandler.INTANCE.checkInput(console.readLine().split(" "));
+            CommandHandler.INSTANCE.checkInput(console.readLine().split(" "));
         }
     }
 
