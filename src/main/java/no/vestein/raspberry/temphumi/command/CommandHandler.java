@@ -3,7 +3,7 @@ package no.vestein.raspberry.temphumi.command;
 import java.util.*;
 
 public enum CommandHandler {
-    INTANCE;
+    INSTANCE;
 
     private final Map<String, ICommand> commandMap = new HashMap<>();
 
