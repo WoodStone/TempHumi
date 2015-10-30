@@ -2,7 +2,11 @@ package no.vestein.raspberry.temphumi;
 
 import java.util.Random;
 
+/**
+ * Utility class. Static.
+ */
 public class Util {
+
     private Util() {}
 
     private static Random rand = new Random();
